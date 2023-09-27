@@ -1,6 +1,0 @@
-User-agent: *
-
-Allow: /
-
-Sitemap: http://www.dynwebads.com/sitemap.xml
-
