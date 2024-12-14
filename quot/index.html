@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html >
+   <head>
+      <!-- <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' /> -->
+      <title>Dynwebads</title>
+      <link rel='stylesheet' type='text/css' href='quot/css/style.css' />
+      <link rel='stylesheet' type='text/css' href='quot/css/print.css' media="print" />
+      <script src="quot/js/jquery-1.3.2.min.js"></script>
+      <script type='text/javascript' src='quot/js/example.js'></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style type="text/css">
+         .icon-bar {
+            position: fixed;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+         }
+         .icon-bar a {
+            display: block;
+            text-align: center;
+            padding: 16px;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+         }
+         .icon-bar a:hover {
+            background-color: #000;
+         }
+         .print {
+            background: #3B5998;
+            color: white;
+         }
+         .downloadpdf {
+            background: #55ACEE;
+            color: white;
+         }
+         .logout {
+            background:red;
+            color: white;
+         }
+
+         @media print {
+            body { text-transform: uppercase; }
+               #buttons { display: none; }
+               #wrapper { width: 100%; margin: 0; font-size:9px; }
+               #wrapper img { max-width:300px; width: 80%; }
+               #bkpos_wrp{display: none;}
+         }
+
+         @media print {
+            button {display: none !important;} input,textarea {border: none !important;box-shadow: none !important;outline: none !important;resize: none !important;}
+         }
+      </style>
+
+      <script>
+         function myFunction() {
+             window.print();
+         }
+      </script>
+   </head>
+
+   <body  id="HTMLtoPDF">
+      <div class="icon-bar" >
+         <div id="bkpos_wrp" style="position: fixed; float: right;"> 
+            <button type="button" onClick="window.print();return false;" style="width:100%; float: right; cursor:pointer; font-size:12px; background-color:#FFA93C; color:#000; text-align: center; border:1px solid #FFA93C; padding: 10px 0px; top: 400px; padding: 15px; font-weight:bold;  "> 
+               <i class="fa fa-print fa-2x"></i>
+            </button>
+         </div>
+         <br><br><br><br>
+         <div id="bkpos_wrp" style="position: fixed; float: right;"> 
+            <a href="../index.html">
+               <button type="button"  style="background-color:#FFA93C; color:green;   font-weight:bold;  "><i class="fa fa-home fa-2x"></i></button>
+            </a>
+         </div>
+      </div>
+
+      <form name="sendemail" id="sendemail" method="POST" action="" enctype="multipart/form-data">
+         <div id="page-wrap" >
+            <textarea id="header">QUOTATION</textarea>
+               <div id="identity">
+            <textarea id="address" style="font-weight: bold;text-align: justify;">1-9-286/2/4/5/2,Ramnagar Gundu,Hyderabad.
+
+info@dynwebads.com
++91-9502531670
+</textarea>
+            <div id="logo">
+               <div id="logoctr">
+                  <a href="javascript:;" id="change-logo" title="Change logo">Change Logo</a>
+                  <a href="javascript:;" id="save-logo" title="Save changes">Save</a>
+                  |
+                  <a href="javascript:;" id="delete-logo" title="Delete logo">Delete Logo</a>
+                  <a href="javascript:;" id="cancel-logo" title="Cancel changes">Cancel</a>
+               </div>
+               <div id="logohelp">
+                  <input id="imageloc" type="text" size="50" value="" /><br />
+                  (max width: 540px, max height: 100px)
+               </div>
+               <img id="image" src="quot/images/logo-one.png" alt="logo" style="height: 100px; width: 100%;" />
+            </div>
+         </div>
+         <div style="clear:both"></div>
+         <div id="customer">
+            <textarea id="customer-title">DYNWEBADS</textarea>
+            <table id="meta">
+               <tr>
+                  <td class="meta-head"><b>Quote #</b></td>
+                  <td><textarea style="width:unset; width:50%;">DWA001</textarea></td>
+               </tr>
+               <tr>
+                  <td class="meta-head"><b>Date</b></td>
+                  <td><textarea id="date" style="width:unset; width:100%;"></textarea></td>
+               </tr>
+            </table>
+         </div>
+         <br>
+         <textarea cols="90"  style="font-weight: bold;text-align: center;font-size: 16px;">PROJECT QUOTATION</textarea>
+         <textarea style=" font-weight: bold;text-align: center;"  cols="100" >We at Dynwebads are pleased to quote the following systems for the project Name</textarea>
+         <table id="items">
+            <tr>
+               <th>Product</th>
+               <th>Description</th>
+               <th>Price</th>
+            </tr>
+            <tr class="item-row">
+               <td class="item-name">
+                  <div class="delete-wpr"><textarea>Web Updates</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div>
+               </td>
+               <td class="description"><textarea>Monthly web consultation (Nov. 1 - Nov. 30, 2017)</textarea></td>
+               <td><span class="price" style="float: right;"><textarea style="width:unset; width:100%;">Rs 15,00,000.00</textarea></span></td>
+            </tr>
+            <tr class="item-row">
+               <td class="item-name">
+                  <div class="delete-wpr"><textarea>SSL Renewals</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div>
+               </td>
+               <td class="description"><textarea>Yearly renewals of SSL certificates on main domain and several subdomains</textarea></td>
+               <td><span class="price" style="float: right;"><textarea style="width:unset; width:100%;">Rs 15,00,000.00</textarea></span></td>
+            </tr>
+            <tr id="hiderow">
+               <td colspan="3"><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
+            </tr>
+         </table>
+         <br>
+         <h3>QUOTATION NOTES:</h3>
+         <br>
+         <div style="margin-left:20px; ">
+            <!--  <ol style="font-size: 15px;">
+               <li> -->
+            <textarea cols="100"  rows="7" style="font-family:Arial, Helvetica, sans-serif">1.All software to have standard one (1) year warranty for manufacturer defects.
+
+2.Software is manufactured under strict Dynwebads standard.
+
+3.This Quote does not include anything outside the above stated bill of materials.
+               </textarea>
+         </div>
+         <br>
+         <table style="width:100%; border: 1px solid black;
+            border-collapse: collapse; padding: 5px;
+            text-align: left;   " >
+            <tr >
+               <th>Deposit Amount</th>
+               <th>Balance Amount</th>
+               <th>Total Amount</th>
+            </tr>
+            <tr>
+               <td><textarea style="font-weight: bold;">Rs 10,000.00</textarea></td>
+               <td><textarea style="font-weight: bold;">Rs 10,000.00</textarea></td>
+               <td><textarea style="font-weight: bold;">Rs 20,000.00</textarea></td>
+            </tr>
+         </table><br>
+         <!-- <pre> -->
+        <b>REMARKS</b><br>
+        <b> PAYMENT TERMS :</b><br>
+
+        <p style="text-align: justify;"><textarea rows="3" cols="100">60% deposit required to start work and Balance 40% on completion of work before uploading project into the server.</textarea></p>
+        <b>NOTES :</b><br>
+        <textarea cols="100" style="font-weight: bold;">10 Days will be consider as working days for this project</textarea>
+         <!-- </pre> -->
+         <div id="terms">
+            <h5>Terms</h5>
+            <textarea>All work shall commence after receiving a downpayment of 60% of the total amount.</textarea>
+         </div>
+      </div>
+      <!-- </div> -->
+    
+</form>
+
+      <!-- <script src="js/jspdf.js"></script> -->
+       <script src="quot/js/jquery-1.3.2.min.js"></script>
+       <!-- <script src="js/pdfFromHTML.js"></script> -->
+   </body>
+</html>
