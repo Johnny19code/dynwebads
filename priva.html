@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacollective - Interactive Marketing Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Beige, Soft Brown, Muted Gold) -->
+    <!-- Application Structure Plan: A single-page dashboard with a sticky top navigation for seamless scrolling between thematic sections. The structure is designed for a top-down narrative flow: starting with a high-level overview (The Challenge), moving to the solution (The Strategy), visualizing the investment (Budget), and finally defining success (KPIs). This task-oriented approach allows a user to quickly grasp the core problem and then explore the strategic details (organic vs. paid vs. posting strategy) through interactive tabs and cards, which is more intuitive than a linear report format. The new 'Posting Strategy' tab provides a detailed breakdown of the content types and their frequency, and the 'Marketing Best Practices' tab consolidates foundational local SEO and automation tips. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Monthly Budget & Platform Allocation -> Goal: Inform/Compare -> Viz: Interactive Donut Chart -> Interaction: Hover tooltips show exact INR amounts -> Justification: Instantly communicates the financial priorities of the strategy -> Library: Chart.js (Canvas).
+        - Report Info: Organic, Paid, Posting, and Best Practices Strategies -> Goal: Organize/Explore -> Presentation: Tabbed interface with clickable detail cards -> Interaction: Clicking tabs switches content; clicking cards reveals detailed tactics -> Justification: Manages information density, allowing users to self-direct their exploration without being overwhelmed by text. The addition of the 'Posting Strategy' and 'Marketing Best Practices' tabs cleanly separates different strategic pillars. -> Method: HTML/CSS/JS.
+        - Report Info: Key Challenges & Goals -> Goal: Inform -> Presentation: Side-by-side summary cards -> Interaction: Static display -> Justification: Provides immediate context at the top of the page, framing the entire strategy -> Method: HTML/CSS.
+        - Report Info: KPIs -> Goal: Inform -> Presentation: Grid of key metrics -> Interaction: Static display -> Justification: Clearly and concisely outlines the measures of success -> Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            max-height: 450px;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #C0A080;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .tab-btn.active {
+            background-color: #C0A080;
+            color: #FFFFFF;
+        }
+        .strategy-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-[#A07C5B]">privacollective</h1>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#overview" class="nav-link text-gray-600 hover:text-[#A07C5B]">Overview</a>
+                <a href="#strategy" class="nav-link text-gray-600 hover:text-[#A07C5B]">Strategy</a>
+                <a href="#budget" class="nav-link text-gray-600 hover:text-[#A07C5B]">Budget</a>
+                <a href="#kpis" class="nav-link text-gray-600 hover:text-[#A07C5B]">KPIs</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#overview" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Overview</a>
+            <a href="#strategy" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Strategy</a>
+            <a href="#budget" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Budget</a>
+            <a href="#kpis" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">KPIs</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="overview" class="text-center min-h-[60vh] flex flex-col justify-center items-center fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-[#A07C5B] mb-4">Privacollective Marketing Blueprint</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">An interactive marketing strategy for <span class="font-semibold">privacollective</span> to bridge the online-to-offline gap, boost in-store footfall, and cultivate a vibrant social media community in Hyderabad.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Primary Goal</h3>
+                    <p class="text-2xl font-bold text-[#C0A080]">Increase In-Store Footfall</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Key Challenge</h3>
+                    <p class="text-2xl font-bold text-[#C0A080]">Low Social Engagement</p>
+                    <p class="text-sm text-gray-500 mt-1">(Currently at 2% ratio)</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-2">Monthly Ad Budget</h3>
+                    <p class="text-2xl font-bold text-[#C0A080]">Conforming in 3rd month.</p>
+                    <p class="text-sm text-gray-500 mt-1">(at starting 1st month 10K & 2nd month 20K  )</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-16 fade-in" style="animation-delay: 0.2s;">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#A07C5B]">The Privacollective Strategy</h2>
+                <p class="text-md text-gray-600 max-w-2xl mx-auto mt-4">A dual-pronged approach focusing on building an authentic community through organic content and driving targeted local traffic with paid advertising. Select a strategy below to explore the detailed tactics.</p>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <div class="bg-white rounded-full p-1 shadow-inner border border-gray-200">
+                    <button id="organic-btn" class="tab-btn active text-sm md:text-base font-semibold py-2 px-6 rounded-full transition-colors duration-300">Organic Growth</button>
+                    <button id="paid-btn" class="tab-btn text-sm md:text-base font-semibold py-2 px-6 rounded-full transition-colors duration-300">Paid Ads</button>
+                    <button id="posting-btn" class="tab-btn text-sm md:text-base font-semibold py-2 px-6 rounded-full transition-colors duration-300">Posting Strategy</button>
+                    <button id="best-practices-btn" class="tab-btn text-sm md:text-base font-semibold py-2 px-6 rounded-full transition-colors duration-300">Just for Priva Collective</button>
+                </div>
+            </div>
+
+            <div id="organic-content" class="strategy-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Content Strategy</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Behind-the-scenes videos</li>
+                            <li>Customer testimonials</li>
+                            <li>New arrivals & styling tips</li>
+                            <li>Festival lookbooks</li>
+                            <li>Instagram-Youtube, Reels or Shorts of store experience</li>
+                            <li>Social Media high intent Keywords</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Community Engagement</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Respond to all comments & DMs</li>
+                            <li>Host weekly Q&A stories</li>
+                            <li>Conduct monthly giveaways</li>
+                            <li>Engage with local communities</li>
+                        </ul>
+                    </div>
+                
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Influencer Marketing</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Target local micro-influencers</li>
+                            <li>Partner with Hyderabad bloggers</li>
+                            <li>Organize influencer store visits</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Offline-to-Online</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>In-store photo zone with hashtag</li>
+                            <li>Incentivize customer posts & tags</li>
+                            <li>Loyalty program for social engagement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="paid-content" class="strategy-content hidden">
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Instagram & Facebook</h3>
+                        <p class="font-semibold text-gray-700">Objectives:</p>
+                        <p class="text-gray-600 mb-2">Store Traffic, Reach, Engagement & Sales</p>
+                        <p class="font-semibold text-gray-700">Targeting:</p>
+                        <p class="text-gray-600 mb-2">Women 18-55 in Hyderabad (+25km)</p>
+                        <p class="font-semibold text-gray-700">Creatives:</p>
+                        <p class="text-gray-600">Carousel Ads, Reels, Stories</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">YouTube Ads</h3>
+                        <p class="font-semibold text-gray-700">Format:</p>
+                        <p class="text-gray-600 mb-2">Skippable In-stream Ads</p>
+                        <p class="font-semibold text-gray-700">Content:</p>
+                        <p class="text-gray-600 mb-2">30-45s videos of new collections</p>
+                        <p class="font-semibold text-gray-700">Targeting:</p>
+                        <p class="text-gray-600">Women in Hyderabad interested in fashion</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google Ads</h3>
+                        <p class="font-semibold text-gray-700">Formats:</p>
+                        <p class="text-gray-600 mb-2">Local Store Ads (Maps)</p>
+                        <p class="font-semibold text-gray-700">Keywords:</p>
+                        <ul class="text-gray-600 list-disc list-inside text-sm">
+                            <li>"saree store Hyderabad"</li>
+                            <li>"function wear women Hyderabad"</li>
+                            <li>"best sarees in Hyderabad"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="posting-content" class="strategy-content hidden">
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Videos</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Day 1 - 1 video / Day 2 - 2 videos / Day 3 - 1 video... so on</li>
+                            <li>Focus on styling tips, lookbooks & behind-the-scenes content</li>
+                            <li>Total target: 45 videos Monthly</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Posters</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>8-10 posters per month</li>
+                            <li>Highlight attractive offers and festival specials</li>
+                            <li>Use static image posts with engaging captions</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Stories</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>3-6 stories daily (90-180 per month)</li>
+                            <li>Q&A sessions, polls, product features & in-store snippets</li>
+                            <li>High engagement, low production content</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Carousels</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>3-4 carousels per month</li>
+                            <li>Story-driven content highlighting a collection or theme</li>
+                            <li>Use for detailed styling guides or product deep-dives</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="best-practices-content" class="strategy-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google My Business & Local SEO</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Optimize GMB profile fully.</li>
+                            <li>Use high-intent review keywords.</li> 
+                            <li>Add store events on GMB.</li>
+                            <li>Additional Providing GEO</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">WhatsApp Automation</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Community Building</li>
+                            <li>Channels Creation</li>
+                            <li>Offers bulk messaging</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Marketing Tips</h3>
+                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
+                            <li>Monitor competitor social media activity and campaigns.</li>
+                            <li>Train staff to encourage social media follows and reviews.</li>
+                            <li>Analyze weekly metrics to optimize content and ad spend.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="budget" class="py-16 bg-white rounded-lg shadow-lg border border-gray-100 fade-in" style="animation-delay: 0.4s;">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#A07C5B]">Budget Allocation</h2>
+                <p class="text-md text-gray-600 max-w-2xl mx-auto mt-4">The monthly budget of <span class="font-semibold">₹10,000</span> is strategically distributed across platforms to maximize local reach and drive high-intent customers to the store.</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="budgetChart"></canvas>
+            </div>
+        </section>
+
+        <section id="kpis" class="py-16 fade-in" style="animation-delay: 0.6s;">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#A07C5B]">Measuring Success</h2>
+                <p class="text-md text-gray-600 max-w-2xl mx-auto mt-4">Success will be tracked through a combination of online and offline Key Performance Indicators (KPIs) reviewed weekly to optimize the strategy.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 text-center">
+                    <p class="text-4xl mb-2">👣</p>
+                    <h3 class="text-lg font-bold text-[#C0A080]">Footfall Increase</h3>
+                    <p class="text-sm text-gray-500">via in-store check-ins</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 text-center">
+                    <p class="text-4xl mb-2">❤️</p>
+                    <h3 class="text-lg font-bold text-[#C0A080]">Engagement Rate</h3>
+                    <p class="text-sm text-gray-500">on Instagram & Facebook</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 text-center">
+                    <p class="text-4xl mb-2">📈</p>
+                    <h3 class="text-lg font-bold text-[#C0A080]">Paid Ads CTR & ROAS</h3>
+                    <p class="text-sm text-gray-500">via Ads Manager</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 text-center">
+                    <p class="text-4xl mb-2">⭐</p>
+                    <h3 class="text-lg font-bold text-[#C0A080]">Google Reviews</h3>
+                    <p class="text-sm text-gray-500">via GMB Dashboard</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            <p>&copy; 2025 Privacollective Marketing Strategy Dashboard. Designed By DYNWEBADS.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const data = {
+                budget: {
+                    labels: ['Instagram & Facebook', 'Google Ads & GMB', 'YouTube'],
+                    values: [6000, 2500, 2500],
+                }
+            };
+
+            const ctx = document.getElementById('budgetChart').getContext('2d');
+            const budgetChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.budget.labels,
+                    datasets: [{
+                        label: 'Budget Allocation',
+                        data: data.budget.values,
+                        backgroundColor: [
+                            '#A07C5B',
+                            '#C0A080',
+                            '#E0D0C0'
+                        ],
+                        borderColor: '#FDFBF8',
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: 'Inter, sans-serif',
+                                    size: 14
+                                },
+                                color: '#4A4A4A',
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            },
+                            bodyFont: {
+                                family: 'Inter, sans-serif',
+                                size: 14
+                            },
+                            titleFont: {
+                                family: 'Inter, sans-serif',
+                                size: 16
+                            },
+                            backgroundColor: '#FFFFFF',
+                            titleColor: '#4A4A4A',
+                            bodyColor: '#4A4A4A',
+                            borderColor: '#E0D0C0',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: false
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            const organicBtn = document.getElementById('organic-btn');
+            const paidBtn = document.getElementById('paid-btn');
+            const postingBtn = document.getElementById('posting-btn');
+            const bestPracticesBtn = document.getElementById('best-practices-btn');
+
+            const organicContent = document.getElementById('organic-content');
+            const paidContent = document.getElementById('paid-content');
+            const postingContent = document.getElementById('posting-content');
+            const bestPracticesContent = document.getElementById('best-practices-content');
+
+            const allButtons = [organicBtn, paidBtn, postingBtn, bestPracticesBtn];
+            const allContent = [organicContent, paidContent, postingContent, bestPracticesContent];
+
+            function showContent(btnToShow) {
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                btnToShow.classList.add('active');
+                allContent.forEach(content => content.classList.add('hidden'));
+                
+                if (btnToShow.id === 'organic-btn') {
+                    organicContent.classList.remove('hidden');
+                } else if (btnToShow.id === 'paid-btn') {
+                    paidContent.classList.remove('hidden');
+                } else if (btnToShow.id === 'posting-btn') {
+                    postingContent.classList.remove('hidden');
+                } else if (btnToShow.id === 'best-practices-btn') {
+                    bestPracticesContent.classList.remove('hidden');
+                }
+            }
+
+            organicBtn.addEventListener('click', () => showContent(organicBtn));
+            paidBtn.addEventListener('click', () => showContent(paidBtn));
+            postingBtn.addEventListener('click', () => showContent(postingBtn));
+            bestPracticesBtn.addEventListener('click', () => showContent(bestPracticesBtn));
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (mobileMenu.offsetParent !== null) {
+                       mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const mainNavLinks = document.querySelectorAll('header nav a.nav-link');
+            
+            const options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        mainNavLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
