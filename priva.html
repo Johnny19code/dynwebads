@@ -10,12 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Warm Neutrals (Beige, Soft Brown, Muted Gold) -->
-    <!-- Application Structure Plan: A single-page dashboard with a sticky top navigation for seamless scrolling between thematic sections. The structure is designed for a top-down narrative flow: starting with a high-level overview (The Challenge), moving to the solution (The Strategy), visualizing the investment (Budget), and finally defining success (KPIs). This task-oriented approach allows a user to quickly grasp the core problem and then explore the strategic details (organic vs. paid vs. posting strategy) through interactive tabs and cards, which is more intuitive than a linear report format. The new 'Posting Strategy' tab provides a detailed breakdown of the content types and their frequency, and the 'Marketing Best Practices' tab consolidates foundational local SEO and automation tips. -->
+    <!-- Application Structure Plan: A single-page dashboard with a sticky top navigation for seamless scrolling between thematic sections. The structure is designed for a top-down narrative flow: starting with a high-level overview (The Challenge), moving to the solution (The Strategy), visualizing the investment (Budget), defining success (KPIs), and finally detailing the execution timeline (Work Flow). This task-oriented approach allows a user to quickly grasp the core problem and then explore the strategic details (organic vs. paid vs. posting strategy), which is more intuitive than a linear report format. -->
     <!-- Visualization & Content Choices: 
         - Report Info: Monthly Budget & Platform Allocation -> Goal: Inform/Compare -> Viz: Interactive Donut Chart -> Interaction: Hover tooltips show exact INR amounts -> Justification: Instantly communicates the financial priorities of the strategy -> Library: Chart.js (Canvas).
-        - Report Info: Organic, Paid, Posting, and Best Practices Strategies -> Goal: Organize/Explore -> Presentation: Tabbed interface with clickable detail cards -> Interaction: Clicking tabs switches content; clicking cards reveals detailed tactics -> Justification: Manages information density, allowing users to self-direct their exploration without being overwhelmed by text. The addition of the 'Posting Strategy' and 'Marketing Best Practices' tabs cleanly separates different strategic pillars. -> Method: HTML/CSS/JS.
+        - Report Info: Organic, Paid, Posting, and Best Practices Strategies -> Goal: Organize/Explore -> Presentation: Tabbed interface with clickable detail cards -> Interaction: Clicking tabs switches content; clicking cards reveals detailed tactics -> Justification: Manages information density, allowing users to self-direct their exploration without being overwhelmed by text. -> Method: HTML/CSS/JS.
         - Report Info: Key Challenges & Goals -> Goal: Inform -> Presentation: Side-by-side summary cards -> Interaction: Static display -> Justification: Provides immediate context at the top of the page, framing the entire strategy -> Method: HTML/CSS.
         - Report Info: KPIs -> Goal: Inform -> Presentation: Grid of key metrics -> Interaction: Static display -> Justification: Clearly and concisely outlines the measures of success -> Method: HTML/CSS.
+        - Report Info: Work Flow & Timeline -> Goal: Organize/Inform -> Presentation: Numbered list with descriptive paragraphs within cards -> Interaction: Static display -> Justification: Breaks down the project into clear, sequential phases for easy understanding. -> Method: HTML/CSS.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -81,6 +82,7 @@
                 <a href="#strategy" class="nav-link text-gray-600 hover:text-[#A07C5B]">Strategy</a>
                 <a href="#budget" class="nav-link text-gray-600 hover:text-[#A07C5B]">Budget</a>
                 <a href="#kpis" class="nav-link text-gray-600 hover:text-[#A07C5B]">KPIs</a>
+                <a href="#workflow" class="nav-link text-gray-600 hover:text-[#A07C5B]">Work Flow</a>
             </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
@@ -93,6 +95,7 @@
             <a href="#strategy" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Strategy</a>
             <a href="#budget" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Budget</a>
             <a href="#kpis" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">KPIs</a>
+            <a href="#workflow" class="block py-2 px-6 text-sm text-gray-600 hover:bg-gray-100">Work Flow</a>
         </div>
     </header>
 
@@ -113,7 +116,7 @@
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
                     <h3 class="text-lg font-semibold text-gray-500 mb-2">Monthly Ad Budget</h3>
-                    <p class="text-2xl font-bold text-[#C0A080]">Will be Conformed in 2nd month Ending</p>
+                    <p class="text-2xl font-bold text-[#C0A080]">Conforming in 3rd month.</p>
                     <p class="text-sm text-gray-500 mt-1">(at starting 1st month 10K & 2nd month 20K  )</p>
                 </div>
             </div>
@@ -173,16 +176,6 @@
                             <li>Loyalty program for social engagement</li>
                         </ul>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
-                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google My Business ( Local SEO )</h3>
-                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>Optimize GMB profile fully.</li>
-                            <li>Use high-intent review keywords.</li> 
-                            <li>Add store events on GMB.</li>
-                            <li>Integrating with AI</li>
-                            <li>Regular posting</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 
@@ -191,9 +184,9 @@
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Instagram & Facebook</h3>
                         <p class="font-semibold text-gray-700">Objectives:</p>
-                        <p class="text-gray-600 mb-2">Reach, Engagement & Sales</p>
+                        <p class="text-gray-600 mb-2">Store Traffic, Reach, Engagement & Sales</p>
                         <p class="font-semibold text-gray-700">Targeting:</p>
-                        <p class="text-gray-600 mb-2">Women 18-55 in Hyderabad (+25 Miles)</p>
+                        <p class="text-gray-600 mb-2">Women 18-55 in Hyderabad (+25km)</p>
                         <p class="font-semibold text-gray-700">Creatives:</p>
                         <p class="text-gray-600">Carousel Ads, Reels, Stories</p>
                     </div>
@@ -207,9 +200,9 @@
                         <p class="text-gray-600">Women in Hyderabad interested in fashion</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
-                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google My Business Ads</h3>
+                        <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google Ads</h3>
                         <p class="font-semibold text-gray-700">Formats:</p>
-                        <p class="text-gray-600 mb-2">Local Store Ads (Maps)</p>
+                        <p class="text-gray-600 mb-2">Search Ads, Local Store Ads (Maps)</p>
                         <p class="font-semibold text-gray-700">Keywords:</p>
                         <ul class="text-gray-600 list-disc list-inside text-sm">
                             <li>"saree store Hyderabad"</li>
@@ -225,16 +218,15 @@
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Videos</h3>
                         <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>Day 1 - 1 video / Day 2 - 2 videos / Day 3 - 1 video... so on</li>
+                            <li>Daily Posting</li>
                             <li>Focus on styling tips, lookbooks & behind-the-scenes content</li>
-                            <li>Total target: 45 videos Monthly</li>
-                            <li>Weekly 1 Promotional Viddeo for specailly Ads</li>
+                            <li>Total target: 22 Regular Content + 3 Ads Content Videos Monthly </li>
                         </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Posters</h3>
                         <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>8-10 posters per month</li>
+                            <li>5 posters per month</li>
                             <li>Highlight attractive offers and festival specials</li>
                             <li>Use static image posts with engaging captions</li>
                         </ul>
@@ -242,7 +234,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Stories</h3>
                         <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>3-6 stories daily (90-180 per month)</li>
+                            <li>2 - 3 stories daily (60-90 per month)</li>
                             <li>Q&A sessions, polls, product features & in-store snippets</li>
                             <li>High engagement, low production content</li>
                         </ul>
@@ -250,7 +242,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Carousels</h3>
                         <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>4 carousels per month</li>
+                            <li>2 carousels per month</li>
                             <li>Story-driven content highlighting a collection or theme</li>
                             <li>Use for detailed styling guides or product deep-dives</li>
                         </ul>
@@ -260,23 +252,19 @@
 
             <div id="best-practices-content" class="strategy-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!--                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Google My Business & Local SEO</h3>
                         <ul class="space-y-2 text-gray-600 list-disc list-inside">
                             <li>Optimize GMB profile fully.</li>
-                            <li>Use high-intent review keywords.</li> 
+                            <li>Use high-intent review keywords.</li>
+                            <li>Weekly photo uploads.</li>
                             <li>Add store events on GMB.</li>
-                            <li>Integrating with AI</li>
+                            <li>Utilize GEO tagging in posts.</li>
                         </ul>
-                    </div> -->
+                    </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">WhatsApp Automation</h3>
-                        <ul class="space-y-2 text-gray-600 list-disc list-inside">
-                            <li>Community Building</li>
-                            <li>Channels Creation</li>
-                            <li>Offers bulk messaging</li>
-                            <li>Catalogue Optimization</li>
-                        </ul>
+                        <p class="text-gray-600">Implement quick replies and welcome messages to streamline customer service and provide instant responses for new queries. Automate broadcast messages for new collections and exclusive offers.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 strategy-card">
                         <h3 class="text-xl font-bold text-[#C0A080] mb-3">Marketing Tips</h3>
@@ -326,6 +314,33 @@
                     <p class="text-4xl mb-2">⭐</p>
                     <h3 class="text-lg font-bold text-[#C0A080]">Google Reviews</h3>
                     <p class="text-sm text-gray-500">via GMB Dashboard</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="py-16 fade-in" style="animation-delay: 0.8s;">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#A07C5B]">Work Flow & Timeline</h2>
+                <p class="text-md text-gray-600 max-w-2xl mx-auto mt-4">A step-by-step process for implementing the strategy, from initial research to ongoing optimization.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-xl font-bold text-[#C0A080] mb-3">Month 1: Initial Setup & Testing</h3>
+                    <ol class="list-decimal list-inside space-y-4 text-gray-600">
+                        <li><span class="font-semibold">Days 1 - 8: Deep Market Research & Setups</span>
+                            <p class="mt-1 text-sm">Conduct a thorough analysis of the market, perform field work, and complete two in-person site visits. This phase also includes all necessary account and ad setup.</p>
+                        </li>
+                        <li><span class="font-semibold">Days 8 - 14: A/B Testing</span>
+                            <p class="mt-1 text-sm">Run controlled A/B tests on the research findings to identify the most effective creative formats, targeting parameters, and ad copy. This is a critical data-gathering phase.</p>
+                        </li>
+                        <li><span class="font-semibold">Days 14 - 30: Ad Campaign Rollout</span>
+                            <p class="mt-1 text-sm">Based on the A/B testing report, the winning ad campaigns will be fully launched and continuously run for the remainder of the month.</p>
+                        </li>
+                    </ol>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                    <h3 class="text-xl font-bold text-[#C0A080] mb-3">Month 2 & Beyond: Iterative Optimization</h3>
+                    <p class="text-gray-600">The detailed report from the first month, including footfall, engagement, and paid ad performance, will be the sole basis for setting up the ad campaigns and allocating the budget for the subsequent month. This data-driven approach ensures continuous improvement.</p>
                 </div>
             </div>
         </section>
@@ -492,11 +507,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
